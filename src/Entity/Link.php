@@ -22,7 +22,7 @@ class Link
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\OneToMany(mappedBy: 'link', targetEntity: Reaction::class)]

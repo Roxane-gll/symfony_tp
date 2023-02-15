@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Home</h1>
+    {% for link in links %}
+        <div class="flex items-center">
+            <div class="grid">
+                <a href="add/reaction/{{ link.id }}/?type=LIKE"><i class="fas fa-arrow-up"></i></a>
+                <a href="add/reaction/{{ link.id }}/?type=DISLIKE"><i class="fas fa-arrow-down"></i></a>
+            </div>
+            {{ link.title }}
+            {{ link.url }}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Link {{ link.title }}</h1>
+    <div class="flex items-center">
+        {{ link.url }}
+        <div class="grid m-3">
+            <a href="add/reaction/{{ link.id }}/?type=LIKE"><i class="fas fa-arrow-up"></i></a>
+            <a href="add/reaction/{{ link.id }}/?type=DISLIKE"><i class="fas fa-arrow-down"></i></a>
+        </div>
+        <a href="/link/delete/{{ link.id }}" class="m-3">
+            <i class="fas fa-trash"></i>
+        </a>
+    </div>
+{% endblock %}
