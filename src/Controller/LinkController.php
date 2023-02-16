@@ -18,7 +18,7 @@ class LinkController extends AbstractController
     #[Route('', name: 'index', methods: ["GET"])]
     public function index(LinkRepository $linkRepository): Response {
         return $this->render('link/index.html.twig', [
-            'links' => $linkRepository->findAll()
+            'links' => $linkRepository->findBy([], ['createdAt'=>'DESC'])
         ]);
     }
 

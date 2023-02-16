@@ -3,11 +3,11 @@
     <a class="text-grey-300  hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/link">Links</a>
     {% block  logged%}
         {% if app.user %}
-            <a class="text-grey-300  hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <a class="text-grey-300  hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="{{ path('update_setting') }}">
                 Logout - Hello {{ app.user.userIdentifier }}
             </a>
         {% else %}
-            <a class="text-grey-300  hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <a class="text-grey-300  hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="{{ path('login') }}">
                 Login
             </a>
         {% endif %}

@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     #[Route('/')]
     public function index(LinkRepository $linkRepository): Response {
         return $this->render('home/index.html.twig', [
-            'links' => $linkRepository->findBy([], limit: 20)
+            'links' => $linkRepository->findBy([], ['createdAt'=>'DESC'], limit: 20)
         ]);
     }
 

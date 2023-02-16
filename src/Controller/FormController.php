@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Link;
+use App\Form\Type\LinkFormType;
+use App\Form\Type\SettingFormType;
 use App\Repository\LinkRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,16 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormController extends AbstractController
 {
     #[Route('link/add', name: 'add_link', methods: ["GET", "POST"])]
-    public function new(Request $request, LinkRepository $linkRepository): Response
+    public function linkAddForm(Request $request, LinkRepository $linkRepository): Response
     {
         // creates a task object and initializes some data for this example
         $link = new Link();
 
-        $form = $this->createFormBuilder($link)
-            ->add('title', TextType::class)
-            ->add('url', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Create Link'])
-            ->getForm();
+        $form = $this->createForm(LinkFormType::class, $link);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $link->setCreatedAt(new \DateTimeImmutable());
@@ -31,6 +29,21 @@ class FormController extends AbstractController
             return $this->redirectToRoute('app_linkindex');
         }
         return $this->render('link/add.html.twig', [
+            "form" => $form
+        ]);
+    }
+
+    #[Route('/account/update', name: 'update_setting', methods: ["GET", "POST"])]
+    public function accountUpdateForm(Request $request): Response
+    {
+        // creates a task object and initializes some data for this example
+
+        $form = $this->createForm(SettingFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('app_home_index');
+        }
+        return $this->render('account/setting.html.twig', [
             "form" => $form
         ]);
     }
